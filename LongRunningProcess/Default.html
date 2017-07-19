@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Long-Running Process</title>
+
+    <script type="text/javascript">
+        function BeginProcess() {
+            // Create an iframe
+            var iframe = document.createElement("iframe");
+
+            // Make the iframe invisible
+            iframe.style.display = "none";
+
+            // Point the iframe to the location of the process
+            iframe.src = "Process.aspx?Framed=True";
+
+            // Add the iframe to the DOM. The process will begin execution at this point
+            var lblOutput = document.getElementById("lblOutput");
+            lblOutput.parentNode.insertBefore(iframe, lblOutput);
+
+            // Disable the button
+            document.getElementById('btnTrigger').disabled = true;
+        };
+
+        function UpdateProgress(message) {
+            document.getElementById('lblOutput').innerHTML = message;
+        };
+    </script>
+</head>
+<body>
+    <form>
+        <div>
+            <h1>Long-Running Process</h1>
+            <p>Remain on this page until the process is complete.</p>
+
+            <input id="btnTrigger" type="submit" value="Start" onclick="BeginProcess(); return false;" />
+            <span id="lblOutput"></span>
+        </div>
+    </form>
+</body>
+</html>
